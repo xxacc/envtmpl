@@ -17,7 +17,7 @@ var (
 func init() {
 	pflag.StringVarP(&env, "env", "e", ".env", "Path to the .env file to use")
 	pflag.StringVarP(&out, "out", "o", "gen", "Directory to put output files")
-	pflag.StringVarP(&prefix, "prefix", "p", "", "Will assume all variables to will be found at <prefix>_<name>")
+	pflag.StringVarP(&prefix, "prefix", "p", "ENVTMPL", "Will assume all variables to will be found at <prefix>_<name>")
 }
 
 func main() {

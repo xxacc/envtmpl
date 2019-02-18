@@ -13,6 +13,8 @@ DIRS := $(addprefix bin/, $(GOARCH))
 
 # Go related variables
 GO ?= $(shell which go)
+GOFMT ?= $(shell which gofmt)
+GOLINT ?= $(shell which golint)
 GOBUILDFLAGS ?= -installsuffix "static"
 GOTESTFLAGS ?= -cover -timeout 30s
 LINTTOOL := $(BIN_DIR)/revive
@@ -61,10 +63,10 @@ test:
 lint: CGO_ENABLED := 0
 lint:
 	@echo "Format:"
-	@gofmt -l $(FILES)
-	@echo "\nRevive lint:"
-	@revive -config=revive.toml -formatter=stylish $(PKGS)
-	@echo "\nGo vet:"
+	@$(GOFMT) -l $(FILES)
+	@echo "\nLint:"
+	@$(GOLINT) $(PKGS)
+	@echo "\nVet:"
 	@$(GO) vet $(PKGS)
 
 .PHONY: clean
